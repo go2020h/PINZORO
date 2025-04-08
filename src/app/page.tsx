@@ -442,7 +442,7 @@ export default function Home() {
               </p>
               <div className="flex justify-center">
                 <Link href="#shops" className="pop-button inline-block text-center">
-                  各店舗を見る
+                  店舗情報を見る
                 </Link>
               </div>
             </div>
