@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary: #ff0000;
+  --primary-dark: #cc0000;
+  --secondary: #ffd800;
+  --secondary-dark: #e6c200;
+  --accent: #ff6b00;
+  --accent-dark: #cc5500;
+  --yellow-bg: #ffd800;
+  --red-accent: #ff0000;
+}
+
+/* Tailwind theme variables */
+:root {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* カスタムスタイル */
+.yellow-bg {
+  background-color: var(--yellow-bg);
+}
+
+.red-accent {
+  color: var(--red-accent);
+}
+
+.pop-text {
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.pop-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--red-accent);
+  text-shadow: 2px 2px 0 #000;
+}
+
+.pop-subtitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.pop-button {
+  background-color: var(--red-accent);
+  color: white;
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  border: 2px solid black;
+}
+
+.pop-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  position: relative;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 800;
+  font-size: 2rem;
+  color: var(--red-accent);
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background-color: var(--red-accent);
+}
+
+/* カスタムスタイル */
+body {
+  color: #000000;
+}
+
+body {
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* スライドショーアニメーション */
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  5% { opacity: 1; }
+  25% { opacity: 1; }
+  30% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* スクロール位置調整用 */
+:target {
+  scroll-margin-top: 100px;
+}
