@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import Link from "next/link";
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(0);
@@ -134,9 +135,9 @@ export default function Home() {
             お客様一人ひとりに笑顔をお届けすることが私たちの使命です。<br/>
             一席ごとに心を込めたサービスで、かけがえのない時間を提供します。
           </p>
-          <a href="#recruit" className="pop-button inline-block hover:bg-red-700 text-white font-bold py-5 px-16 rounded-full transition-all transform hover:scale-105 text-2xl md:text-3xl">
+          <Link href="#recruit" className="pop-button inline-block hover:bg-red-700 text-white font-bold py-5 px-16 rounded-full transition-all transform hover:scale-105 text-2xl md:text-3xl">
             一緒に働く
-          </a>
+          </Link>
         </div>
         <div className="absolute bottom-0 left-0 w-full">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full">
@@ -211,9 +212,9 @@ export default function Home() {
             </div>
           </div>
           <div className="text-center mt-8">
-            <a href="/company" className="pop-button inline-block">
+            <Link href="/company" className="pop-button inline-block">
               会社概要を見る
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -246,14 +247,14 @@ export default function Home() {
                   PINZOROでは、仕事だけでなく社員同士や他企業との交流も大切にしています。<br/>明るく活気のある職場環境で、チームワークを育みながら日々成長しています。
                 </p>
                 <div className="text-center">
-                  <a 
+                  <Link 
                     href="https://www.youtube.com/@pinzoro" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="pop-button inline-block text-center"
                   >
                     Youtubeチャンネルを見る
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -355,9 +356,9 @@ export default function Home() {
                     <p className="text-black mb-1">{shop.address}</p>
                     <p className="text-black mb-1">TEL: {shop.tel}</p>
                     <div className="flex justify-between items-center mt-4">
-                      <a href={shop.url} target="_blank" rel="noopener noreferrer" className="text-red-600 hover:text-red-800 font-bold">
+                      <Link href={shop.url} target="_blank" rel="noopener noreferrer" className="text-red-600 hover:text-red-800 font-bold">
                         店舗ページ →
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -440,9 +441,9 @@ export default function Home() {
                 各店舗へのお問い合わせや応募のご連絡をお待ちしております。
               </p>
               <div className="flex justify-center">
-                <a href="#shops" className="pop-button inline-block text-center">
+                <Link href="#shops" className="pop-button inline-block text-center">
                   各店舗を見る
-                </a>
+                </Link>
               </div>
             </div>
           </div>
