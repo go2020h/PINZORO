@@ -11,6 +11,10 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <>
       <header className="fixed top-0 left-0 w-full bg-[#FFD800] z-50 shadow-md border-b-4 border-red-600">
@@ -42,12 +46,12 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         <div className="fixed top-20 right-0 w-64 bg-[#FECF02] z-40 shadow-md border-l-4 border-red-600 md:hidden">
           <nav className="px-4 py-4">
             <ul className="flex flex-col space-y-4">
-              <li><Link href="/" className="block text-lg font-bold hover:text-red-600 transition-colors">トップ</Link></li>
-              <li><Link href="/#message" className="block text-lg font-bold hover:text-red-600 transition-colors">メッセージ</Link></li>
-              <li><Link href="/#business" className="block text-lg font-bold hover:text-red-600 transition-colors">会社概要</Link></li>
-              <li><Link href="/#youtube" className="block text-lg font-bold hover:text-red-600 transition-colors">PINZORO体験</Link></li>
-              <li><Link href="/#shops" className="block text-lg font-bold hover:text-red-600 transition-colors">店舗情報</Link></li>
-              <li><Link href="/#recruit" className="block text-lg font-bold hover:text-red-600 transition-colors">採用情報</Link></li>
+              <li><Link href="/" className="block text-lg font-bold hover:text-red-600 transition-colors" onClick={closeMenu}>トップ</Link></li>
+              <li><Link href="/#message" className="block text-lg font-bold hover:text-red-600 transition-colors" onClick={closeMenu}>メッセージ</Link></li>
+              <li><Link href="/#business" className="block text-lg font-bold hover:text-red-600 transition-colors" onClick={closeMenu}>会社概要</Link></li>
+              <li><Link href="/#youtube" className="block text-lg font-bold hover:text-red-600 transition-colors" onClick={closeMenu}>PINZORO体験</Link></li>
+              <li><Link href="/#shops" className="block text-lg font-bold hover:text-red-600 transition-colors" onClick={closeMenu}>店舗情報</Link></li>
+              <li><Link href="/#recruit" className="block text-lg font-bold hover:text-red-600 transition-colors" onClick={closeMenu}>採用情報</Link></li>
             </ul>
           </nav>
         </div>
