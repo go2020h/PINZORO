@@ -17,8 +17,13 @@ export const metadata: Metadata = {
   title: "PINZORO",
   description: "PINZOROの公式サイト",
   icons: {
-    icon: "/logo.png",
-    apple: "/logo.png",
+    icon: [
+      {
+        url: "/favicon.ico",
+        sizes: "any",
+      },
+    ],
+    apple: "/apple-icon.png",
   },
 };
 
@@ -30,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <head>
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/favicon.ico" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

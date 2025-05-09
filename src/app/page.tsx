@@ -9,6 +9,7 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(0);
   const [isAnimating] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [selectedQR, setSelectedQR] = useState<number | null>(null);
 
   // 12店舗のデータ
   const shops = [
@@ -122,10 +123,47 @@ export default function Home() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // QRコードポップアップを閉じる関数
+  const closeQRPopup = () => {
+    setSelectedQR(null);
+  };
+
   return (
     <div className="flex flex-col min-h-[85vh]">
+      {/* QRコードポップアップ */}
+      {selectedQR && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-30 bg-gray-800" onClick={closeQRPopup}>
+          <div className="relative bg-white p-4 rounded-lg shadow-xl" onClick={(e) => e.stopPropagation()}>
+            <button 
+              className="absolute -top-3 -right-3 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-md text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+              onClick={closeQRPopup}
+            >
+              ✕
+            </button>
+            <div className="relative w-64 h-64 mx-auto">
+              <Image 
+                src={`/shop${selectedQR}_qr.png`} 
+                alt="QRコード拡大表示" 
+                fill
+                style={{ objectFit: "contain" }}
+                className="p-2"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* ヒーローセクション */}
-      <section className="relative min-h-[85vh] flex items-center justify-center yellow-bg overflow-hidden">
+      <section 
+        className="relative min-h-[85vh] flex items-center justify-center yellow-bg overflow-hidden"
+        style={{
+          backgroundImage: 'url("/back.jpg")',
+          backgroundSize: '150px',
+          backgroundRepeat: 'repeat',
+          backgroundBlendMode: 'soft-light',
+          backgroundColor: 'rgba(249, 217, 73, 0.9)'
+        }}
+      >
         <div className="container mx-auto px-4 z-10 text-center py-8">
           <div className="mb-4 inline-block bg-white rounded-full px-10 py-3">
             <h2 className="text-3xl md:text-5xl font-bold text-red-600">美味しい焼き鳥と笑顔のある店へ</h2>
@@ -185,7 +223,17 @@ export default function Home() {
       </section>
 
       {/* BUSINESS */}
-      <section className="py-20 yellow-bg relative overflow-hidden" id="business">
+      <section 
+        className="py-20 yellow-bg relative overflow-hidden" 
+        id="business"
+        style={{
+          backgroundImage: 'url("/back.jpg")',
+          backgroundSize: '150px',
+          backgroundRepeat: 'repeat',
+          backgroundBlendMode: 'soft-light',
+          backgroundColor: 'rgba(249, 217, 73, 0.9)'
+        }}
+      >
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="section-title mb-16">BUSINESS</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -219,113 +267,153 @@ export default function Home() {
         </div>
       </section>
 
-      {/* YouTubeセクション */}
-      <section className="py-20 bg-[#FFEC80]" id="youtube">
-        <div className="container mx-auto px-4">
+      {/* PINZORO体験セクション */}
+      <section 
+        className="py-20 relative overflow-hidden bg-white" 
+        id="youtube"
+      >
+        <div className="container mx-auto px-4 relative z-10">
           <h2 className="section-title mb-16">PINZORO体験</h2>
           <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div className="bg-white rounded-lg overflow-hidden shadow-lg">
-                <div className="relative" style={{ paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
-                  <iframe 
-                    className="absolute top-0 left-0 w-full h-full" 
-                    src="https://www.youtube.com/embed/9AthTj8BWcE" 
-                    title="５０円焼きとり絶好鳥　球技大会" 
-                    frameBorder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    referrerPolicy="strict-origin-when-cross-origin" 
-                    allowFullScreen
-                  ></iframe>
+            <div className="rounded-xl overflow-hidden shadow-xl mb-12" style={{ 
+              backgroundImage: 'url("/back.jpg")',
+              backgroundSize: '150px',
+              backgroundRepeat: 'repeat',
+              backgroundBlendMode: 'soft-light',
+              backgroundColor: 'rgba(249, 217, 73, 0.9)'
+            }}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+                <div className="p-0 overflow-hidden flex items-center justify-center">
+                  <div className="relative w-full md:w-11/12 mx-auto" style={{ aspectRatio: '16/9', overflow: 'hidden', borderRadius: '0.75rem' }}>
+                    <iframe 
+                      className="absolute top-0 left-0 w-full h-full" 
+                      src="https://www.youtube.com/embed/9AthTj8BWcE?rel=0" 
+                      title="５０円焼きとり絶好鳥　球技大会" 
+                      frameBorder="0" 
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                      referrerPolicy="strict-origin-when-cross-origin" 
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                </div>
+                <div className="p-8 flex flex-col justify-between order-1 md:order-2" style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                  <div>
+                    <div className="inline-block bg-red-600 text-white px-4 py-1 rounded-full mb-3">動画</div>
+                    <h3 className="text-2xl font-bold mb-4 text-red-600">５０円焼きとり絶好鳥　球技大会</h3>
+                    <p className="text-lg mb-4 text-black">
+                      お付き合いのある会社さんと合同でスポーツ大会を開催しました。バスケットボールとボーリングで熱い戦いを繋り広げています！
+                    </p>
+                    <p className="text-lg mb-6 text-black font-bold">
+                      PINZOROでは、仕事だけでなく社員同士や他企業との交流も大切にしています。<br/>明るく活気のある職場環境で、チームワークを育みながら日々成長しています。
+                    </p>
+                  </div>
+                  <div className="text-center">
+                    <Link 
+                      href="https://www.youtube.com/@pinzoro" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="pop-button inline-block text-center"
+                    >
+                      Youtubeチャンネルを見る
+                    </Link>
+                  </div>
                 </div>
               </div>
-              <div>
-                <h3 className="text-2xl font-bold mb-4 text-red-600">５０円焼きとり絶好鳥　球技大会</h3>
-                <p className="text-lg mb-4 text-black">
-                  お付き合いのある会社さんと合同でスポーツ大会を開催しました。バスケットボールとボーリングで熱い戦いを繰り広げています！
-                </p>
-                <p className="text-lg mb-6 text-black font-bold">
-                  PINZOROでは、仕事だけでなく社員同士や他企業との交流も大切にしています。<br/>明るく活気のある職場環境で、チームワークを育みながら日々成長しています。
-                </p>
-                <div className="text-center">
-                  <Link 
-                    href="https://www.youtube.com/@pinzoro" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="pop-button inline-block text-center"
-                  >
-                    Youtubeチャンネルを見る
-                  </Link>
+            </div>
+          </div>
+          
+          <div className="mt-16 max-w-6xl mx-auto"><div className="rounded-xl overflow-hidden shadow-xl mb-12" style={{ 
+            backgroundImage: 'url("/back.jpg")',
+            backgroundSize: '150px',
+            backgroundRepeat: 'repeat',
+            backgroundBlendMode: 'soft-light',
+            backgroundColor: 'rgba(249, 217, 73, 0.9)'
+          }}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-center">
+                <div className="p-8 flex flex-col justify-between order-2 md:order-1" style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                  <div>
+                    <div className="inline-block bg-red-600 text-white px-4 py-1 rounded-full mb-3">環境</div>
+                    <h3 className="text-2xl font-bold mb-4 text-red-600">楽しく働ける環境づくり</h3>
+                    <p className="text-lg mb-4 text-black">
+                      PINZOROでは、仕事だけでなく、スタッフ同士の交流も大切にしています。社員旅行やBBQ、スポーツ大会など、様々なイベントを通じて絆を深めています。
+                    </p>
+                    <p className="text-lg mb-4 text-black">
+                      若いメンバーが多く、活気あふれる職場環境の中で、一人ひとりが自分らしく輝ける場所を提供しています。風通しの良い職場で、アイデアを出し合い、共に成長していくことを大切にしています。
+                    </p>
+                    <p className="text-lg mb-4 text-black font-bold">
+                      私たちと一緒に、お客様に笑顔を届けながら、自分自身も成長していきませんか？
+                    </p>
+                  </div>
+                </div>
+                <div className="relative overflow-hidden order-1 md:order-2 flex items-center justify-center" style={{ paddingTop: '20px', paddingLeft: '15px', paddingRight: '15px' }}>
+                  <div className="relative w-11/12 mx-auto flex items-center justify-center" style={{ width: '90%', height: '0', paddingBottom: '50.625%', position: 'relative' }}>
+                    {[1, 2, 3, 4].map((num) => (
+                      <div 
+                        key={num}
+                        className="absolute inset-0 flex items-center justify-center"
+                        style={{ 
+                          opacity: 0,
+                          animation: `fadeInOut 16s infinite ${(num - 1) * 4}s`,
+                        }}
+                      >
+                        <Image 
+                          src={`/staff/fun${num}.jpg`} 
+                          alt={`PINZOROスタッフ ${num}`} 
+                          fill
+                          className="rounded-xl"
+                          style={{ objectFit: "cover", objectPosition: "center 40%" }}
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           
           <div className="mt-16 max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div>
-                <h3 className="text-2xl font-bold mb-4 text-red-600">楽しく働ける環境づくり</h3>
-                <p className="text-lg mb-4 text-black">
-                  PINZOROでは、仕事だけでなく、スタッフ同士の交流も大切にしています。社員旅行やBBQ、スポーツ大会など、様々なイベントを通じて絆を深めています。
-                </p>
-                <p className="text-lg mb-4 text-black">
-                  若いメンバーが多く、活気あふれる職場環境の中で、一人ひとりが自分らしく輝ける場所を提供しています。風通しの良い職場で、アイデアを出し合い、共に成長していくことを大切にしています。
-                </p>
-                <p className="text-lg mb-4 text-black font-bold">
-                  私たちと一緒に、お客様に笑顔を届けながら、自分自身も成長していきませんか？
-                </p>
-              </div>
-              <div className="relative rounded-lg overflow-hidden" style={{ paddingBottom: '56.25%' }}>
-                <div className="absolute inset-0">
-                  {[1, 2, 3, 4].map((num) => (
-                    <Image 
-                      key={num}
-                      src={`/staff/fun${num}.jpg`} 
-                      alt={`PINZOROスタッフ ${num}`} 
-                      fill
-                      style={{ 
-                        objectFit: "cover",
-                        opacity: 0,
-                        animation: `fadeInOut 16s infinite ${(num - 1) * 4}s`,
-                      }}
-                      className="rounded-lg absolute inset-0"
-                    />
-                  ))}
+          <div className="rounded-xl overflow-hidden shadow-xl mb-12" style={{ 
+            backgroundImage: 'url("/back.jpg")',
+            backgroundSize: '150px',
+            backgroundRepeat: 'repeat',
+            backgroundBlendMode: 'soft-light',
+            backgroundColor: 'rgba(249, 217, 73, 0.9)'
+          }}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-center">
+                <div className="relative overflow-hidden order-1 md:order-1 flex items-center justify-center" style={{ height: '400px', padding: '20px 0' }}>
+                  <div className="relative h-full w-9/12 mx-auto flex items-center justify-center rounded-xl overflow-hidden">
+                    {[1, 2, 3, 4].map((num) => (
+                      <div 
+                        key={num}
+                        className="absolute inset-0 flex items-center justify-center"
+                        style={{ 
+                          opacity: 0,
+                          animation: `fadeInOut 16s infinite ${(num - 1) * 4}s`,
+                        }}
+                      >
+                        <Image 
+                          src={`/staff/staff${num}.jpg`} 
+                          alt={`PINZOROスタッフ ${num}`} 
+                          fill
+                          style={{ objectFit: "contain", objectPosition: "center center", borderRadius: "0.75rem" }}
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          
-          <div className="mt-16 max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              {/* 左側：スライドショー */}
-              <div className="relative overflow-hidden rounded-lg mx-auto w-4/5 order-2 md:order-1" style={{ paddingBottom: '106.67%' }}>
-                <div className="absolute inset-0">
-                  {[1, 2, 3, 4].map((num) => (
-                    <Image 
-                      key={num}
-                      src={`/staff/staff${num}.jpg`} 
-                      alt={`PINZOROスタッフ ${num}`} 
-                      fill
-                      style={{ 
-                        objectFit: "cover",
-                        opacity: 0,
-                        animation: `fadeInOut 16s infinite ${(num - 1) * 4}s`,
-                      }}
-                      className="rounded-lg absolute inset-0"
-                    />
-                  ))}
+                
+                <div className="p-8 flex flex-col justify-center order-2 md:order-2" style={{ height: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                  <div className="py-6">
+                    <div className="inline-block bg-red-600 text-white px-4 py-1 rounded-full mb-3">スタッフ</div>
+                    <h3 className="text-2xl font-bold mb-6 text-red-600">スタッフ紹介</h3>
+                    <p className="text-lg mb-6 text-black">
+                      PINZOROでは、個性豊かなスタッフが集まり、日々楽しく仕事に取り組んでいます。
+                    </p>
+                    <p className="text-lg mb-8 text-black">
+                      スタッフ同士の絆を大切にし、お互いに助け合いながら成長しています。若いメンバーが多く、活気あふれる職場環境です。
+                    </p>
+                  </div>
                 </div>
-              </div>
-              
-              {/* 右側：テキスト */}
-              <div className="order-1 md:order-2">
-                <h3 className="text-2xl font-bold mb-4 text-red-600">スタッフ紹介</h3>
-                <p className="text-lg mb-4 text-black">
-                  PINZOROでは、個性豊かなスタッフが集まり、日々楽しく仕事に取り組んでいます。
-                </p>
-                <p className="text-lg mb-6 text-black">
-                  スタッフ同士の絆を大切にし、お互いに助け合いながら成長しています。若いメンバーが多く、活気あふれる職場環境です。
-                </p>
               </div>
             </div>
           </div>
@@ -333,10 +421,20 @@ export default function Home() {
       </section>
 
       {/* 店舗紹介セクション */}
-      <section className="py-20 yellow-bg relative overflow-hidden" id="shops">
+      <section 
+        className="py-20 yellow-bg relative overflow-hidden" 
+        id="shops"
+        style={{
+          backgroundImage: 'url("/back.jpg")',
+          backgroundSize: '150px',
+          backgroundRepeat: 'repeat',
+          backgroundBlendMode: 'soft-light',
+          backgroundColor: 'rgba(249, 217, 73, 0.9)'
+        }}
+      >
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="section-title mb-16">SHOPS</h2>
-          <div className="relative px-10">
+          <div className="relative px-2 sm:px-4 md:px-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {currentShops.map((shop) => (
                 <div key={shop.id} className="bg-white rounded-lg overflow-hidden shadow-md transition-transform hover:transform hover:scale-105">
@@ -352,10 +450,29 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2">{shop.name}</h3>
-                    <p className="text-black mb-1">{shop.address}</p>
-                    <p className="text-black mb-1">TEL: {shop.tel}</p>
-                    <div className="flex justify-between items-center mt-4">
+                    <div className="flex flex-col md:flex-row">
+                      <div className="flex-grow">
+                        <h3 className="text-xl font-bold mb-2">{shop.name}</h3>
+                        <p className="text-black mb-1">{shop.address}</p>
+                        <p className="text-black mb-1">TEL: {shop.tel}</p>
+                      </div>
+                      <div className="mt-4 md:mt-0 md:ml-4 flex-shrink-0 flex items-center justify-center w-full md:w-auto md:justify-start">
+                        <div 
+                          className="relative w-28 h-28 md:w-32 md:h-32 cursor-pointer transition-transform hover:scale-105"
+                          onClick={() => setSelectedQR(shop.id)}
+                        >
+                          <Image 
+                            src={`/shop${shop.id}_qr.png`} 
+                            alt={`${shop.name}のQRコード`} 
+                            fill
+                            style={{ objectFit: "contain" }}
+                            className="p-1"
+                          />
+                        </div>
+                      </div>
+                      <div className="mt-4 hidden md:block"></div>
+                    </div>
+                    <div className="mt-4 flex justify-start">
                       <Link href={shop.url} target="_blank" rel="noopener noreferrer" className="text-red-600 hover:text-red-800 font-bold">
                         店舗ページ →
                       </Link>
@@ -437,14 +554,43 @@ export default function Home() {
                 </div>
               </div>
               
-              <p className="text-center text-lg mb-6 text-black font-bold">
+              <p className="text-center text-lg my-8 text-black font-bold">
                 各店舗へのお問い合わせや応募のご連絡をお待ちしております。
               </p>
-              <div className="flex justify-center">
+              <div className="flex justify-center mb-10">
                 <Link href="#shops" className="pop-button inline-block text-center">
                   店舗情報を見る
                 </Link>
               </div>
+              
+              <div className="mt-12 mb-8">
+                <h3 className="text-2xl font-bold mb-6 text-center">事務員募集</h3>
+                <div className="bg-yellow-50 p-6 rounded-lg max-w-3xl mx-auto">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="text-xl font-bold mb-3 text-red-600">業務内容</h4>
+                      <ul className="list-disc pl-5 text-black space-y-2">
+                        <li>飲食店の経理業務</li>
+                        <li>勤怠管理</li>
+                        <li>各店舗記入用紙からパソコン数値入力など</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-bold mb-3 text-red-600">勤務地</h4>
+                      <p className="text-black mb-2">
+                        〒130-0022<br/>
+                        東京都墨田区江東橋2-8-1<br/>
+                        ワコーレ錦糸町マンション1F E室
+                      </p>
+                      <p className="text-sm text-gray-600 mt-2">※店舗ではなく事務所での勤務となります</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <p className="text-center text-lg mb-6 text-black font-bold">
+                事務所へのお問い合わせや応募のご連絡もお待ちしております。
+              </p>
             </div>
           </div>
         </div>
