@@ -179,15 +179,15 @@ export default function Home() {
         </div>
         <div className="absolute bottom-0 left-0 w-full">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full">
-            <path fill="#ffffff" fillOpacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,202.7C672,203,768,181,864,181.3C960,181,1056,203,1152,208C1248,213,1344,203,1392,197.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            <path fill="#000000" fillOpacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,202.7C672,203,768,181,864,181.3C960,181,1056,203,1152,208C1248,213,1344,203,1392,197.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
           </svg>
         </div>
       </section>
 
       {/* TOP MESSAGE */}
-      <section className="py-10 bg-white" id="message">
+      <section className="py-10 bg-black" id="message">
         <div className="container mx-auto px-4">
-          <h2 className="section-title mb-16">TOP MESSAGE</h2>
+          <h2 className="section-title mb-16 text-white">TOP MESSAGE</h2>
           <div className="max-w-4xl mx-auto bg-white rounded-lg overflow-hidden shadow-lg">
             <div className="p-8">
               <div className="text-center mb-8">
@@ -269,11 +269,11 @@ export default function Home() {
 
       {/* PINZORO体験セクション */}
       <section 
-        className="py-20 relative overflow-hidden bg-white" 
+        className="py-20 relative overflow-hidden bg-black" 
         id="youtube"
       >
         <div className="container mx-auto px-4 relative z-10">
-          <h2 className="section-title mb-16">PINZORO体験</h2>
+          <h2 className="section-title mb-16 text-white">PINZORO体験</h2>
           <div className="max-w-6xl mx-auto">
             <div className="rounded-xl overflow-hidden shadow-xl mb-12" style={{ 
               backgroundImage: 'url("/back.jpg")',
@@ -282,28 +282,79 @@ export default function Home() {
               backgroundBlendMode: 'soft-light',
               backgroundColor: 'rgba(249, 217, 73, 0.9)'
             }}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-                <div className="p-0 overflow-hidden flex items-center justify-center">
-                  <div className="relative w-full md:w-11/12 mx-auto" style={{ aspectRatio: '16/9', overflow: 'hidden', borderRadius: '0.75rem' }}>
-                    <iframe 
-                      className="absolute top-0 left-0 w-full h-full" 
-                      src="https://www.youtube.com/embed/9AthTj8BWcE?rel=0" 
-                      title="５０円焼きとり絶好鳥　球技大会" 
-                      frameBorder="0" 
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                      referrerPolicy="strict-origin-when-cross-origin" 
-                      allowFullScreen
-                    ></iframe>
+              <div className="flex flex-col gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-transparent rounded-lg p-4">
+                  <div className="p-0 overflow-hidden flex items-center justify-center">
+                    <div className="relative w-full mx-auto" style={{ aspectRatio: '16/9', overflow: 'hidden', borderRadius: '0.75rem' }}>
+                      <iframe 
+                        className="absolute top-0 left-0 w-full h-full" 
+                        src="https://www.youtube.com/embed/9AthTj8BWcE?rel=0" 
+                        title="５０円焼きとり絶好鳥　球技大会" 
+                        frameBorder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerPolicy="strict-origin-when-cross-origin" 
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <div className="inline-block bg-red-600 text-white px-4 py-1 rounded-full mb-3">動画</div>
+                    <h3 className="text-xl font-bold mb-2 text-red-600">球技大会</h3>
+                    <p className="text-base mb-2 text-black">
+                      お付き合いのある業者さんと合同でスポーツ大会を開催しました。<br/>バスケットボールやボーリングで決勝まで熱戦を繋り広げました。
+                    </p>
                   </div>
                 </div>
-                <div className="p-8 flex flex-col justify-between order-1 md:order-2" style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                  <div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-transparent rounded-lg p-4">
+                  <div className="p-0 overflow-hidden flex items-center justify-center">
+                    <div className="relative w-full mx-auto" style={{ aspectRatio: '16/9', overflow: 'hidden', borderRadius: '0.75rem' }}>
+                      <iframe 
+                        className="absolute top-0 left-0 w-full h-full" 
+                        src="https://www.youtube.com/embed/UwAHjCJ-PiI" 
+                        title="50円焼きとり絶好鳥　ミニ四駆大会２０２３in横浜" 
+                        frameBorder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerPolicy="strict-origin-when-cross-origin" 
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  </div>
+                  <div className="p-4">
                     <div className="inline-block bg-red-600 text-white px-4 py-1 rounded-full mb-3">動画</div>
-                    <h3 className="text-2xl font-bold mb-4 text-red-600">５０円焼きとり絶好鳥　球技大会</h3>
-                    <p className="text-lg mb-4 text-black">
-                      お付き合いのある会社さんと合同でスポーツ大会を開催しました。バスケットボールとボーリングで熱い戦いを繋り広げています！
+                    <h3 className="text-xl font-bold mb-2 text-red-600">ミニ四駆大会</h3>
+                    <p className="text-base mb-2 text-black">
+                      社内で懐かしのミニ四駆作りを行い、店舗対抗レースを行いました。<br/>マシンの改造やコース設計など、全員が真剣に取り組みました。
                     </p>
-                    <p className="text-lg mb-6 text-black font-bold">
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-transparent rounded-lg p-4">
+                  <div className="p-0 overflow-hidden flex items-center justify-center">
+                    <div className="relative w-full mx-auto" style={{ aspectRatio: '16/9', overflow: 'hidden', borderRadius: '0.75rem' }}>
+                      <iframe 
+                        className="absolute top-0 left-0 w-full h-full" 
+                        src="https://www.youtube.com/embed/zI5qA4RTgLU" 
+                        title="50円焼きとり絶好鳥　釣り大会in沖縄" 
+                        frameBorder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerPolicy="strict-origin-when-cross-origin" 
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <div className="inline-block bg-red-600 text-white px-4 py-1 rounded-full mb-3">動画</div>
+                    <h3 className="text-xl font-bold mb-2 text-red-600">社員旅行</h3>
+                    <p className="text-base mb-2 text-black">
+                      年一度のお楽しみ社員旅行、今回は沖縄で釣り大会を開催しました。<br/>美しい海と自然の中で、社員同士の絆も深まりました。
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="bg-transparent rounded-lg p-4">
+                  <div className="text-center">
+                    <p className="text-lg mb-4 text-black font-bold">
                       PINZOROでは、仕事だけでなく社員同士や他企業との交流も大切にしています。<br/>明るく活気のある職場環境で、チームワークを育みながら日々成長しています。
                     </p>
                   </div>
@@ -517,9 +568,9 @@ export default function Home() {
       </section>
 
       {/* 求人セクション */}
-      <section className="py-20 bg-white" id="recruit">
+      <section className="py-20 bg-black" id="recruit">
         <div className="container mx-auto px-4">
-          <h2 className="section-title mb-16">RECRUIT</h2>
+          <h2 className="section-title mb-16 text-white">RECRUIT</h2>
           <div className="max-w-5xl mx-auto bg-white rounded-lg overflow-hidden shadow-lg">
             <div className="p-8">
               <h3 className="text-2xl font-bold mb-4 text-center">一緒に働きませんか？</h3>
