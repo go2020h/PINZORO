@@ -166,9 +166,9 @@ export default function Home() {
       >
         <div className="container mx-auto px-4 z-10 text-center py-8">
           <div className="mb-4 inline-block bg-white rounded-full px-10 py-3">
-            <h2 className="text-3xl md:text-5xl font-bold text-red-600">美味しい焼き鳥と笑顔のある店へ</h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-red-600">美味しいお料理と笑顔のある店へ</h2>
           </div>
-          <h1 className="pop-title mb-4 text-7xl md:text-[10rem] leading-tight">ONE SEAT<br/>ONE SMILE</h1>
+          <h1 className="pop-title mb-4 text-7xl md:text-[10rem] leading-tight">ONE SEAT<br/>ONE LAUGH</h1>
           <p className="text-2xl md:text-4xl mb-8 max-w-6xl mx-auto font-bold">
             お客様一人ひとりに笑顔をお届けすることが私たちの使命です。<br/>
             一席ごとに心を込めたサービスで、かけがえのない時間を提供します。
@@ -240,10 +240,10 @@ export default function Home() {
             <div>
               <h3 className="text-2xl font-bold mb-4 text-red-600">PINZOROについて</h3>
               <p className="text-lg mb-4 text-black">
-                PINZOROは「50円焼き鳥 絶好鳥」を中心に、お客様に喜んでいただける飲食店を展開しています。東京都と千葉県を中心に12店舗を運営し、リーズナブルな価格で高品質な焼き鳥を提供しています。
+                PINZOROは「50円焼き鳥 絶好鳥」を中心に、お客様に喜んでいただける飲食店を展開しています。東京都と千葉県を中心に12店舗を運営し、リーズナブルな価格で高品質なお料理を提供しています。
               </p>
               <p className="text-lg mb-4 text-black">
-                各店舗では、アットホームな雰囲気の中で気軽に楽しめる焼き鳥と、厳選されたドリンクをご用意。個性豊かなスタッフが、お客様一人ひとりに心のこもったサービスを提供します。
+                各店舗では、アットホームな雰囲気の中で気軽に楽しめるお料理と、厳選されたドリンクをご用意。個性豊かなスタッフが、お客様一人ひとりに心のこもったサービスを提供します。
               </p>
               <p className="text-lg mb-0 text-black">
                 また、社内行事の充実や風通しの良い職場環境づくりにも力を入れており、スタッフ同士の絆を大切にしながら、日々成長を続けています。若いメンバーが多く、活気あふれる企業として、今後も新たな価値の創造に挑戦していきます。
@@ -564,7 +564,7 @@ export default function Home() {
               </div>
               
               <div className="mt-12 mb-8">
-                <h3 className="text-2xl font-bold mb-6 text-center">事務員募集</h3>
+                <h3 className="text-2xl font-bold mb-6 text-center">経理募集</h3>
                 <div className="bg-yellow-50 p-6 rounded-lg max-w-3xl mx-auto">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>

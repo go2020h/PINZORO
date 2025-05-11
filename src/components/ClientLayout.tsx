@@ -17,14 +17,13 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full bg-[#FFD800] z-50 shadow-md border-b-4 border-red-600">
+      <header className="fixed top-0 left-0 w-full bg-black z-50 shadow-md">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="flex items-center">
-            <Image src="/logo.png" alt="PINZORO" width={40} height={40} className="mr-2" />
-            <span className="text-2xl font-bold text-red-600">PINZORO</span>
+            <Image src="/logo.png" alt="PINZORO" width={160} height={50} className="object-contain" />
           </Link>
           <nav className="hidden md:block">
-            <ul className="flex space-x-8">
+            <ul className="flex space-x-8 text-white">
               <li><Link href="/" className="hover:text-red-600 transition-colors font-bold">トップ</Link></li>
               <li><Link href="/#message" className="hover:text-red-600 transition-colors font-bold">メッセージ</Link></li>
               <li><Link href="/#business" className="hover:text-red-600 transition-colors font-bold">会社概要</Link></li>
@@ -34,7 +33,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             </ul>
           </nav>
           <button onClick={toggleMenu} className="md:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
@@ -43,9 +42,9 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       
       {/* モバイルメニュー */}
       {isMenuOpen && (
-        <div className="fixed top-20 right-0 w-64 bg-[#FECF02] z-40 shadow-md border-l-4 border-red-600 md:hidden">
+        <div className="fixed top-[60px] right-0 w-64 bg-black z-40 shadow-md md:hidden">
           <nav className="px-4 py-4">
-            <ul className="flex flex-col space-y-4">
+            <ul className="flex flex-col space-y-4 text-white">
               <li><Link href="/" className="block text-lg font-bold hover:text-red-600 transition-colors" onClick={closeMenu}>トップ</Link></li>
               <li><Link href="/#message" className="block text-lg font-bold hover:text-red-600 transition-colors" onClick={closeMenu}>メッセージ</Link></li>
               <li><Link href="/#business" className="block text-lg font-bold hover:text-red-600 transition-colors" onClick={closeMenu}>会社概要</Link></li>
@@ -57,7 +56,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         </div>
       )}
       
-      <main className="pt-20">
+      <main className="pt-[60px]">
         {children}
       </main>
       <footer className="bg-black text-white py-10">
