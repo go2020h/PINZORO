@@ -249,14 +249,36 @@ export default function Home() {
                 また、社内行事の充実や風通しの良い職場環境づくりにも力を入れており、スタッフ同士の絆を大切にしながら、日々成長を続けています。若いメンバーが多く、活気あふれる企業として、今後も新たな価値の創造に挑戦していきます。
               </p>
             </div>
-            <div className="relative rounded-lg overflow-hidden w-4/5 mx-auto" style={{ paddingBottom: '45%' }}>
-              <Image 
-                src="/business.png" 
-                alt="PINZOROビジネス" 
-                fill
-                style={{ objectFit: "contain" }}
-                className="rounded-lg"
-              />
+            <div className="relative w-4/5 mx-auto">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="col-span-2 relative rounded-lg overflow-hidden" style={{ paddingBottom: '25%' }}>
+                  <Image 
+                    src="/business.png" 
+                    alt="PINZOROビジネス 1" 
+                    fill
+                    style={{ objectFit: "contain" }}
+                    className="rounded-lg"
+                  />
+                </div>
+                <div className="relative rounded-lg overflow-hidden" style={{ paddingBottom: '50%' }}>
+                  <Image 
+                    src="/business2.png" 
+                    alt="PINZOROビジネス 2" 
+                    fill
+                    style={{ objectFit: "contain" }}
+                    className="rounded-lg"
+                  />
+                </div>
+                <div className="relative rounded-lg overflow-hidden" style={{ paddingBottom: '50%' }}>
+                  <Image 
+                    src="/business3.png" 
+                    alt="PINZOROビジネス 3" 
+                    fill
+                    style={{ objectFit: "contain" }}
+                    className="rounded-lg"
+                  />
+                </div>
+              </div>
             </div>
           </div>
           <div className="text-center mt-8">
@@ -643,6 +665,59 @@ export default function Home() {
                 事務所へのお問い合わせや応募のご連絡もお待ちしております。
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SPONSOR */}
+      <section 
+        className="py-20 relative overflow-hidden" 
+        id="sponsor"
+        style={{
+          backgroundImage: 'url("/back.jpg")',
+          backgroundSize: '150px',
+          backgroundRepeat: 'repeat',
+          backgroundBlendMode: 'soft-light',
+          backgroundColor: 'rgba(249, 217, 73, 0.9)'
+        }}
+      >
+        <div className="container mx-auto px-4 relative z-10">
+          <h2 className="section-title mb-16">SPONSOR</h2>
+          <div className="max-w-5xl mx-auto">
+            <p className="text-center text-lg mb-12 text-black font-bold">
+              PINZOROは以下の企業様を支援しております。<br/>
+              共に成長し、価値を創造してまいります。
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+              <div className="bg-transparent p-4 md:p-6 rounded-lg">
+                <div className="relative w-2/3 md:w-full mx-auto" style={{ paddingBottom: '45%' }}>
+                  <Image 
+                    src="/sponsor1.png" 
+                    alt="スポンサー企業 1" 
+                    fill
+                    style={{ objectFit: "contain" }}
+                    className="rounded-lg"
+                  />
+                </div>
+
+              </div>
+              
+              <div className="bg-transparent p-4 md:p-6 rounded-lg">
+                <div className="relative w-2/3 md:w-full mx-auto" style={{ paddingBottom: '45%' }}>
+                  <Image 
+                    src="/sponsor2.png" 
+                    alt="スポンサー企業 2" 
+                    fill
+                    style={{ objectFit: "contain" }}
+                    className="rounded-lg"
+                  />
+                </div>
+
+              </div>
+            </div>
+            
+
           </div>
         </div>
       </section>

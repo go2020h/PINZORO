@@ -30,6 +30,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
               <li><Link href="/#youtube" className="hover:text-red-600 transition-colors font-bold">PINZORO体験</Link></li>
               <li><Link href="/#shops" className="hover:text-red-600 transition-colors font-bold">店舗情報</Link></li>
               <li><Link href="/#recruit" className="hover:text-red-600 transition-colors font-bold">採用情報</Link></li>
+              <li><Link href="/#sponsor" className="hover:text-red-600 transition-colors font-bold">スポンサー</Link></li>
             </ul>
           </nav>
           <button onClick={toggleMenu} className="md:hidden">
@@ -51,6 +52,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
               <li><Link href="/#youtube" className="block text-lg font-bold hover:text-red-600 transition-colors" onClick={closeMenu}>PINZORO体験</Link></li>
               <li><Link href="/#shops" className="block text-lg font-bold hover:text-red-600 transition-colors" onClick={closeMenu}>店舗情報</Link></li>
               <li><Link href="/#recruit" className="block text-lg font-bold hover:text-red-600 transition-colors" onClick={closeMenu}>採用情報</Link></li>
+              <li><Link href="/#sponsor" className="block text-lg font-bold hover:text-red-600 transition-colors" onClick={closeMenu}>スポンサー</Link></li>
             </ul>
           </nav>
         </div>
