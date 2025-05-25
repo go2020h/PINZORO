@@ -1,14 +1,10 @@
 "use client";
 
 import Image from 'next/image'
-import { FaInstagram } from 'react-icons/fa'
-import { FaXTwitter } from 'react-icons/fa6'
-import { FaLine } from 'react-icons/fa6'
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
 import Link from "next/link";
-import { useState, useEffect } from 'react';
-import { createPortal } from 'react-dom';
+import { useState, useEffect, useCallback } from 'react';
 
 // モーダルポップアップコンポーネント
 interface ImageModalProps {
@@ -35,14 +31,14 @@ const ImageModal = ({ images, isOpen, onClose, initialIndex, imageType }: ImageM
   }, []);
 
   // 前の画像へ
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
-  };
+  }, [images.length]);
 
   // 次の画像へ
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
+  }, [images.length]);
 
   // ESCキーで閉じる
   useEffect(() => {
