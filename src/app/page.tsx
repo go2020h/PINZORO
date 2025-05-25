@@ -325,12 +325,12 @@ const FourImageSlideshow = () => {
   );
 };
 
-// 9枚表示用スライドショーコンポーネント
+// 5枚表示用スライドショーコンポーネント
 const NineImageSlideshow = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const images = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const images = [1, 2, 3, 4, 5];
   
   // レスポンシブデザインのチェック
   useEffect(() => {

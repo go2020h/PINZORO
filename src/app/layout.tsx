@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://pinzoro.jp'),
   title: "PINZORO",
   description: "ONE SEAT, ONE LAUGH - 美味しいお料理と笑顔のあるお店へ。お客様一人ひとりに笑顔をお届けします。",
   icons: {
