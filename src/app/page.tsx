@@ -1,9 +1,422 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
+import Image from 'next/image'
+import { FaInstagram } from 'react-icons/fa'
+import { FaXTwitter } from 'react-icons/fa6'
+import { FaLine } from 'react-icons/fa6'
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 import Link from "next/link";
+import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
+
+// モーダルポップアップコンポーネント
+interface ImageModalProps {
+  images: number[];
+  isOpen: boolean;
+  onClose: () => void;
+  initialIndex?: number;
+  imageType: 'fun' | 'staff';
+}
+
+const ImageModal = ({ images, isOpen, onClose, initialIndex, imageType }: ImageModalProps) => {
+  const [currentIndex, setCurrentIndex] = useState(initialIndex || 0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // レスポンシブデザインのチェック
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // 前の画像へ
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
+  };
+
+  // 次の画像へ
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+
+  // ESCキーで閉じる
+  useEffect(() => {
+    if (!isOpen) return;
+    
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowLeft') handlePrev();
+      if (e.key === 'ArrowRight') handleNext();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    // モーダルが開いている間はスクロールを無効にする
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'auto';
+    };
+  }, [isOpen, onClose, handlePrev, handleNext]);
+
+  // モーダルが非表示の場合は何もレンダリングしない
+  if (!isOpen) return null;
+
+  // 画像のパスを設定
+  const imagePath = imageType === 'fun' ? `/staff/fun${images[currentIndex]}.jpg` : `/staff/staff${images[currentIndex]}.jpg`;
+  const imageAlt = `PINZOROスタッフ ${images[currentIndex]}`;
+  
+  return (
+    <div 
+      className="modal-overlay active" 
+      onClick={onClose}
+      style={{ 
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 9999
+      }}
+    >
+      <div 
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          backgroundImage: 'url("/back.jpg")',
+          backgroundSize: '150px',
+          backgroundRepeat: 'repeat',
+          backgroundBlendMode: 'soft-light',
+          backgroundColor: 'rgba(249, 217, 73, 0.9)',
+          borderRadius: '8px',
+          width: isMobile ? '95%' : '80%',
+          maxWidth: isMobile ? '100%' : '1000px',
+          height: isMobile ? '70%' : '80%',
+          maxHeight: isMobile ? '600px' : '800px',
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
+        {/* 閉じるボタン */}
+        <button 
+          onClick={onClose}
+          style={{
+            position: 'absolute',
+            top: '10px',
+            right: '10px',
+            backgroundColor: 'white',
+            borderRadius: '50%',
+            width: '30px',
+            height: '30px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            cursor: 'pointer',
+            border: 'none',
+            boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
+            zIndex: 1020
+          }}
+        >
+          <FaTimes />
+        </button>
+
+        {/* 画像表示エリア */}
+        <div style={{
+          position: 'relative',
+          width: '100%',
+          height: isMobile ? 'calc(100% - 60px)' : '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          overflow: 'hidden',
+          padding: '10px'
+        }}>
+          <div style={{
+            maxWidth: '100%',
+            maxHeight: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '0 10px'
+          }}>
+            <div style={{
+              width: isMobile ? '90%' : (imageType === 'staff' ? '60%' : '75%'),
+              height: isMobile ? '90%' : (imageType === 'staff' ? '60%' : '75%'),
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
+              <Image
+                src={imagePath}
+                alt={imageAlt}
+                width={isMobile ? 900 : (imageType === 'staff' ? 600 : 800)}
+                height={isMobile ? 650 : (imageType === 'staff' ? 400 : 550)}
+                style={{ 
+                  objectFit: 'contain',
+                  maxWidth: '100%',
+                  maxHeight: '100%',
+                  width: 'auto',
+                  height: 'auto'
+                }}
+                unoptimized
+              />
+            </div>
+          </div>
+        </div>
+        
+        {/* PC表示用の左右ボタン */}
+        {!isMobile && (
+          <>
+            <button 
+              onClick={handlePrev}
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '20px',
+                transform: 'translateY(-50%)',
+                backgroundColor: 'white',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                cursor: 'pointer',
+                border: 'none',
+                boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
+              }}
+            >
+              <FaChevronLeft />
+            </button>
+            
+            <button 
+              onClick={handleNext}
+              style={{
+                position: 'absolute',
+                top: '50%',
+                right: '20px',
+                transform: 'translateY(-50%)',
+                backgroundColor: 'white',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                cursor: 'pointer',
+                border: 'none',
+                boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
+              }}
+            >
+              <FaChevronRight />
+            </button>
+          </>
+        )}
+        
+        {/* スマホ表示用の下部ボタン */}
+        {isMobile && (
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '10px 0',
+            height: '60px',
+            borderTop: '1px solid rgba(255, 255, 255, 0.2)'
+          }}>
+            <button 
+              onClick={handlePrev}
+              style={{
+                backgroundColor: 'white',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                cursor: 'pointer',
+                border: 'none',
+                boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
+                margin: '0 20px'
+              }}
+            >
+              <FaChevronLeft />
+            </button>
+            
+            <button 
+              onClick={handleNext}
+              style={{
+                backgroundColor: 'white',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                cursor: 'pointer',
+                border: 'none',
+                boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
+                margin: '0 20px'
+              }}
+            >
+              <FaChevronRight />
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+// 4枚表示用スライドショーコンポーネント
+const FourImageSlideshow = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
+  const images = [1, 2, 3, 4];
+
+  useEffect(() => {
+    // モーダルが開いている間は自動再生を停止
+    if (!modalOpen) {
+      const interval = setInterval(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+      }, 3000); // 3秒ごとに切り替え
+      return () => clearInterval(interval);
+    }
+  }, [images.length, modalOpen]);
+
+  const handleImageClick = () => {
+    setModalOpen(true);
+  };
+
+  return (
+    <>
+      <div 
+        className="slideshow-container relative w-11/12 mx-auto cursor-pointer" 
+        style={{ width: '90%', height: '0', paddingBottom: '50.625%', position: 'relative' }}
+        onClick={handleImageClick}
+      >
+        {images.map((num, index) => (
+          <div 
+            key={num}
+            className={`slideshow-item absolute inset-0 flex items-center justify-center ${index === currentIndex ? 'active' : ''}`}
+          >
+            <Image 
+              src={`/staff/fun${num}.jpg`} 
+              alt={`PINZOROスタッフ ${num}`} 
+              fill
+              className="rounded-xl"
+              style={{ objectFit: "cover", objectPosition: "center 40%" }}
+            />
+          </div>
+        ))}
+      </div>
+      <ImageModal 
+        images={images} 
+        isOpen={modalOpen} 
+        onClose={() => setModalOpen(false)} 
+        initialIndex={currentIndex}
+        imageType="fun"
+      />
+    </>
+  );
+};
+
+// 9枚表示用スライドショーコンポーネント
+const NineImageSlideshow = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const images = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  
+  // レスポンシブデザインのチェック
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    // モーダルが開いている間は自動再生を停止
+    if (!modalOpen) {
+      const interval = setInterval(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+      }, 3000); // 3秒ごとに切り替え
+      return () => clearInterval(interval);
+    }
+  }, [images.length, modalOpen]);
+
+  const handleImageClick = () => {
+    setModalOpen(true);
+  };
+
+  return (
+    <>
+      <div className={isMobile ? 'w-full mx-auto' : 'w-10/12 mx-auto'} style={{ padding: isMobile ? '2px 0' : '15px 10px', boxSizing: 'border-box' }}>
+        <div 
+          className="slideshow-container relative rounded-xl overflow-hidden cursor-pointer"
+          onClick={handleImageClick}
+          style={{ 
+            width: '100%', 
+            height: '0', 
+            paddingBottom: isMobile ? '90%' : '75%', 
+            position: 'relative',
+            margin: isMobile ? '2px 0' : '15px 0'
+          }}
+        >
+          {images.map((num, index) => (
+            <div 
+              key={num}
+              className={`slideshow-item absolute inset-0 flex items-center justify-center ${index === currentIndex ? 'active' : ''}`}
+              style={{ padding: '0 3px' }}
+            >
+              <div style={{
+                width: isMobile ? '100%' : '85%',
+                height: isMobile ? '100%' : '85%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                margin: '0 auto'
+              }}>
+                <Image 
+                  src={`/staff/staff${num}.jpg`} 
+                  alt={`PINZOROスタッフ ${num}`} 
+                  width={isMobile ? 800 : 700}
+                  height={isMobile ? 600 : 525}
+                  style={{ 
+                    objectFit: "contain", 
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    borderRadius: isMobile ? "0.5rem" : "0.75rem"
+                  }}
+                  unoptimized
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <ImageModal 
+        images={images} 
+        isOpen={modalOpen} 
+        onClose={() => setModalOpen(false)} 
+        initialIndex={currentIndex}
+        imageType="staff"
+      />
+    </>
+  );
+};
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(0);
@@ -419,26 +832,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="relative overflow-hidden order-1 md:order-2 flex items-center justify-center" style={{ paddingTop: '20px', paddingLeft: '15px', paddingRight: '15px' }}>
-                  <div className="relative w-11/12 mx-auto flex items-center justify-center" style={{ width: '90%', height: '0', paddingBottom: '50.625%', position: 'relative' }}>
-                    {[1, 2, 3, 4].map((num) => (
-                      <div 
-                        key={num}
-                        className="absolute inset-0 flex items-center justify-center"
-                        style={{ 
-                          opacity: 0,
-                          animation: `fadeInOut 16s infinite ${(num - 1) * 4}s`,
-                        }}
-                      >
-                        <Image 
-                          src={`/staff/fun${num}.jpg`} 
-                          alt={`PINZOROスタッフ ${num}`} 
-                          fill
-                          className="rounded-xl"
-                          style={{ objectFit: "cover", objectPosition: "center 40%" }}
-                        />
-                      </div>
-                    ))}
-                  </div>
+                  <FourImageSlideshow />
                 </div>
               </div>
             </div>
@@ -454,25 +848,7 @@ export default function Home() {
           }}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-center">
                 <div className="relative overflow-hidden order-1 md:order-1 flex items-center justify-center" style={{ height: '400px', padding: '20px 0' }}>
-                  <div className="relative h-full w-9/12 mx-auto flex items-center justify-center rounded-xl overflow-hidden">
-                    {[1, 2, 3, 4].map((num) => (
-                      <div 
-                        key={num}
-                        className="absolute inset-0 flex items-center justify-center"
-                        style={{ 
-                          opacity: 0,
-                          animation: `fadeInOut 16s infinite ${(num - 1) * 4}s`,
-                        }}
-                      >
-                        <Image 
-                          src={`/staff/staff${num}.jpg`} 
-                          alt={`PINZOROスタッフ ${num}`} 
-                          fill
-                          style={{ objectFit: "contain", objectPosition: "center center", borderRadius: "0.75rem" }}
-                        />
-                      </div>
-                    ))}
-                  </div>
+                  <NineImageSlideshow />
                 </div>
                 
                 <div className="p-8 flex flex-col justify-center order-2 md:order-2" style={{ height: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
