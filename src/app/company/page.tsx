@@ -45,7 +45,7 @@ export default function Company() {
                   </tr>
                   <tr>
                     <th className="py-4 px-2 sm:px-6 text-left bg-yellow-50 w-1/3 font-bold whitespace-nowrap">店舗数</th>
-                    <td className="py-4 px-6 text-black">全国12店舗（直営店）</td>
+                    <td className="py-4 px-6 text-black">全国11店舗（直営店）</td>
                   </tr>
                 </tbody>
               </table>

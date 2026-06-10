@@ -420,7 +420,7 @@ export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
   const [selectedQR, setSelectedQR] = useState<number | null>(null);
 
-  // 12店舗のデータ
+  // 11店舗のデータ
   const shops = [
     { 
       id: 1, 
@@ -428,13 +428,6 @@ export default function Home() {
       address: "東京都江戸川区西葛西5-5−16 2F", 
       tel: "03-5679-5640", 
       url: "https://zekkohcho.com/shop/nishikasaiten/" 
-    },
-    { 
-      id: 2, 
-      name: "50円焼き鳥 絶好鳥 平井本店", 
-      address: "東京都江戸川区平井6-37-1", 
-      tel: "03-6231-9494", 
-      url: "https://zekkohcho.com/shop/hiraihonten/" 
     },
     { 
       id: 3, 
@@ -649,7 +642,7 @@ export default function Home() {
             <div>
               <h3 className="text-2xl font-bold mb-4 text-red-600">PINZOROについて</h3>
               <p className="text-lg mb-4 text-black">
-                PINZOROは「50円焼き鳥 絶好鳥」を中心に、お客様に喜んでいただける飲食店を展開しています。東京都と千葉県を中心に12店舗を運営し、リーズナブルな価格で高品質なお料理を提供しています。
+                PINZOROは「50円焼き鳥 絶好鳥」を中心に、お客様に喜んでいただける飲食店を展開しています。東京都と千葉県を中心に11店舗を運営し、リーズナブルな価格で高品質なお料理を提供しています。
               </p>
               <p className="text-lg mb-4 text-black">
                 各店舗では、アットホームな雰囲気の中で気軽に楽しめるお料理と、厳選されたドリンクをご用意。個性豊かなスタッフが、お客様一人ひとりに心のこもったサービスを提供します。
