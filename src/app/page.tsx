@@ -901,20 +901,22 @@ export default function Home() {
                         <p className="text-black mb-1">{shop.address}</p>
                         <p className="text-black mb-1">TEL: {shop.tel}</p>
                       </div>
-                      <div className="mt-4 md:mt-0 md:ml-4 flex-shrink-0 flex items-center justify-center w-full md:w-auto md:justify-start">
-                        <div
-                          className="relative w-28 h-28 md:w-32 md:h-32 cursor-pointer transition-transform hover:scale-105"
-                          onClick={() => setSelectedQR(shop.id)}
-                        >
-                          <Image
-                            src={`/shop${shop.id}_qr.png`}
-                            alt={`${shop.name}のQRコード`}
-                            fill
-                            style={{ objectFit: "contain" }}
-                            className="p-1"
-                          />
+                      {shop.id !== 10 && (
+                        <div className="mt-4 md:mt-0 md:ml-4 flex-shrink-0 flex items-center justify-center w-full md:w-auto md:justify-start">
+                          <div
+                            className="relative w-28 h-28 md:w-32 md:h-32 cursor-pointer transition-transform hover:scale-105"
+                            onClick={() => setSelectedQR(shop.id)}
+                          >
+                            <Image
+                              src={`/shop${shop.id}_qr.png`}
+                              alt={`${shop.name}のQRコード`}
+                              fill
+                              style={{ objectFit: "contain" }}
+                              className="p-1"
+                            />
+                          </div>
                         </div>
-                      </div>
+                      )}
                       <div className="mt-4 hidden md:block"></div>
                     </div>
                     <div className="mt-4 flex justify-start">
