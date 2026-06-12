@@ -24,7 +24,7 @@ const ImageModal = ({ images, isOpen, onClose, initialIndex, imageType }: ImageM
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -43,7 +43,7 @@ const ImageModal = ({ images, isOpen, onClose, initialIndex, imageType }: ImageM
   // ESCキーで閉じる
   useEffect(() => {
     if (!isOpen) return;
-    
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
       if (e.key === 'ArrowLeft') handlePrev();
@@ -66,12 +66,12 @@ const ImageModal = ({ images, isOpen, onClose, initialIndex, imageType }: ImageM
   // 画像のパスを設定
   const imagePath = imageType === 'fun' ? `/staff/fun${images[currentIndex]}.jpg` : `/staff/staff${images[currentIndex]}.jpg`;
   const imageAlt = `PINZOROスタッフ ${images[currentIndex]}`;
-  
+
   return (
-    <div 
-      className="modal-overlay active" 
+    <div
+      className="modal-overlay active"
       onClick={onClose}
-      style={{ 
+      style={{
         position: 'fixed',
         top: 0,
         left: 0,
@@ -84,7 +84,7 @@ const ImageModal = ({ images, isOpen, onClose, initialIndex, imageType }: ImageM
         zIndex: 9999
       }}
     >
-      <div 
+      <div
         onClick={(e) => e.stopPropagation()}
         style={{
           backgroundImage: 'url("/back.jpg")',
@@ -103,7 +103,7 @@ const ImageModal = ({ images, isOpen, onClose, initialIndex, imageType }: ImageM
         }}
       >
         {/* 閉じるボタン */}
-        <button 
+        <button
           onClick={onClose}
           style={{
             position: 'absolute',
@@ -156,7 +156,7 @@ const ImageModal = ({ images, isOpen, onClose, initialIndex, imageType }: ImageM
                 alt={imageAlt}
                 width={isMobile ? 900 : (imageType === 'staff' ? 600 : 800)}
                 height={isMobile ? 650 : (imageType === 'staff' ? 400 : 550)}
-                style={{ 
+                style={{
                   objectFit: 'contain',
                   maxWidth: '100%',
                   maxHeight: '100%',
@@ -168,11 +168,11 @@ const ImageModal = ({ images, isOpen, onClose, initialIndex, imageType }: ImageM
             </div>
           </div>
         </div>
-        
+
         {/* PC表示用の左右ボタン */}
         {!isMobile && (
           <>
-            <button 
+            <button
               onClick={handlePrev}
               style={{
                 position: 'absolute',
@@ -193,8 +193,8 @@ const ImageModal = ({ images, isOpen, onClose, initialIndex, imageType }: ImageM
             >
               <FaChevronLeft />
             </button>
-            
-            <button 
+
+            <button
               onClick={handleNext}
               style={{
                 position: 'absolute',
@@ -217,7 +217,7 @@ const ImageModal = ({ images, isOpen, onClose, initialIndex, imageType }: ImageM
             </button>
           </>
         )}
-        
+
         {/* スマホ表示用の下部ボタン */}
         {isMobile && (
           <div style={{
@@ -228,7 +228,7 @@ const ImageModal = ({ images, isOpen, onClose, initialIndex, imageType }: ImageM
             height: '60px',
             borderTop: '1px solid rgba(255, 255, 255, 0.2)'
           }}>
-            <button 
+            <button
               onClick={handlePrev}
               style={{
                 backgroundColor: 'white',
@@ -246,8 +246,8 @@ const ImageModal = ({ images, isOpen, onClose, initialIndex, imageType }: ImageM
             >
               <FaChevronLeft />
             </button>
-            
-            <button 
+
+            <button
               onClick={handleNext}
               style={{
                 backgroundColor: 'white',
@@ -294,19 +294,19 @@ const FourImageSlideshow = () => {
 
   return (
     <>
-      <div 
-        className="slideshow-container relative w-11/12 mx-auto cursor-pointer" 
+      <div
+        className="slideshow-container relative w-11/12 mx-auto cursor-pointer"
         style={{ width: '90%', height: '0', paddingBottom: '50.625%', position: 'relative' }}
         onClick={handleImageClick}
       >
         {images.map((num, index) => (
-          <div 
+          <div
             key={num}
             className={`slideshow-item absolute inset-0 flex items-center justify-center ${index === currentIndex ? 'active' : ''}`}
           >
-            <Image 
-              src={`/staff/fun${num}.jpg`} 
-              alt={`PINZOROスタッフ ${num}`} 
+            <Image
+              src={`/staff/fun${num}.jpg`}
+              alt={`PINZOROスタッフ ${num}`}
               fill
               className="rounded-xl"
               style={{ objectFit: "cover", objectPosition: "center 40%" }}
@@ -314,10 +314,10 @@ const FourImageSlideshow = () => {
           </div>
         ))}
       </div>
-      <ImageModal 
-        images={images} 
-        isOpen={modalOpen} 
-        onClose={() => setModalOpen(false)} 
+      <ImageModal
+        images={images}
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
         initialIndex={currentIndex}
         imageType="fun"
       />
@@ -331,13 +331,13 @@ const NineImageSlideshow = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const images = [1, 2, 3, 4, 5];
-  
+
   // レスポンシブデザインのチェック
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -360,19 +360,19 @@ const NineImageSlideshow = () => {
   return (
     <>
       <div className={isMobile ? 'w-full mx-auto' : 'w-10/12 mx-auto'} style={{ padding: isMobile ? '2px 0' : '15px 10px', boxSizing: 'border-box' }}>
-        <div 
+        <div
           className="slideshow-container relative rounded-xl overflow-hidden cursor-pointer"
           onClick={handleImageClick}
-          style={{ 
-            width: '100%', 
-            height: '0', 
-            paddingBottom: isMobile ? '90%' : '75%', 
+          style={{
+            width: '100%',
+            height: '0',
+            paddingBottom: isMobile ? '90%' : '75%',
             position: 'relative',
             margin: isMobile ? '2px 0' : '15px 0'
           }}
         >
           {images.map((num, index) => (
-            <div 
+            <div
               key={num}
               className={`slideshow-item absolute inset-0 flex items-center justify-center ${index === currentIndex ? 'active' : ''}`}
               style={{ padding: '0 3px' }}
@@ -385,13 +385,13 @@ const NineImageSlideshow = () => {
                 alignItems: 'center',
                 margin: '0 auto'
               }}>
-                <Image 
-                  src={`/staff/staff${num}.jpg`} 
-                  alt={`PINZOROスタッフ ${num}`} 
+                <Image
+                  src={`/staff/staff${num}.jpg`}
+                  alt={`PINZOROスタッフ ${num}`}
                   width={isMobile ? 800 : 700}
                   height={isMobile ? 600 : 525}
-                  style={{ 
-                    objectFit: "contain", 
+                  style={{
+                    objectFit: "contain",
                     maxWidth: "100%",
                     maxHeight: "100%",
                     borderRadius: isMobile ? "0.5rem" : "0.75rem"
@@ -403,10 +403,10 @@ const NineImageSlideshow = () => {
           ))}
         </div>
       </div>
-      <ImageModal 
-        images={images} 
-        isOpen={modalOpen} 
-        onClose={() => setModalOpen(false)} 
+      <ImageModal
+        images={images}
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
         initialIndex={currentIndex}
         imageType="staff"
       />
@@ -422,82 +422,89 @@ export default function Home() {
 
   // 11店舗のデータ
   const shops = [
-    { 
-      id: 1, 
-      name: "50円焼き鳥 絶好鳥 西葛西店", 
-      address: "東京都江戸川区西葛西5-5−16 2F", 
-      tel: "03-5679-5640", 
-      url: "https://zekkohcho.com/shop/nishikasaiten/" 
+    {
+      id: 1,
+      name: "50円焼き鳥 絶好鳥 西葛西店",
+      address: "東京都江戸川区西葛西5-5−16 2F",
+      tel: "03-5679-5640",
+      url: "https://zekkohcho.com/shop/nishikasaiten/"
     },
-    { 
-      id: 3, 
-      name: "50円焼き鳥 絶好鳥 船堀店", 
-      address: "東京都江戸川区船堀１-7-6 夢ビル1階", 
-      tel: "03-5878-0660", 
-      url: "https://zekkocho-funabori.owst.jp/" 
+    {
+      id: 3,
+      name: "50円焼き鳥 絶好鳥 船堀店",
+      address: "東京都江戸川区船堀１-7-6 夢ビル1階",
+      tel: "03-5878-0660",
+      url: "https://zekkocho-funabori.owst.jp/"
     },
-    { 
-      id: 4, 
-      name: "50円焼き鳥 絶好鳥 瑞江店", 
-      address: "東京都江戸川区瑞江２-1-8", 
-      tel: "03-6231-8111", 
-      url: "https://zekkohcho.com/shop/mizueten/" 
+    {
+      id: 4,
+      name: "50円焼き鳥 絶好鳥 瑞江店",
+      address: "東京都江戸川区瑞江２-1-8",
+      tel: "03-6231-8111",
+      url: "https://zekkohcho.com/shop/mizueten/"
     },
-    { 
-      id: 5, 
-      name: "50円焼き鳥 絶好鳥 市川店", 
-      address: "千葉県市川市市川1-2-5 2F", 
-      tel: "047-322-8593", 
-      url: "https://akr8213898010.owst.jp/" 
+    {
+      id: 5,
+      name: "50円焼き鳥 絶好鳥 市川店",
+      address: "千葉県市川市市川1-2-5 2F",
+      tel: "047-322-8593",
+      url: "https://akr8213898010.owst.jp/"
     },
-    { 
-      id: 6, 
-      name: "50円焼き鳥 絶好鳥 本八幡店", 
-      address: "千葉県市川市南八幡４-3-3", 
-      tel: "047-316-1118", 
-      url: "https://zekkoucho-motoyawata.owst.jp/" 
+    {
+      id: 6,
+      name: "50円焼き鳥 絶好鳥 本八幡店",
+      address: "千葉県市川市南八幡４-3-3",
+      tel: "047-316-1118",
+      url: "https://zekkoucho-motoyawata.owst.jp/"
     },
-    { 
-      id: 7, 
-      name: "50円串揚げぜっこうちょう 西船橋店", 
-      address: "千葉県船橋市西船4-20-7　SAP西船橋駅前ビル2F", 
-      tel: "047-497-8383", 
-      url: "https://zekkoucho-nishifunabashi.owst.jp/" 
+    {
+      id: 7,
+      name: "50円串揚げぜっこうちょう 西船橋店",
+      address: "千葉県船橋市西船4-20-7　SAP西船橋駅前ビル2F",
+      tel: "047-497-8383",
+      url: "https://zekkoucho-nishifunabashi.owst.jp/"
     },
-    { 
-      id: 8, 
-      name: "ぜっこうちょう 其の八 扇橋店", 
-      address: "東京都江東区扇橋２-5-10", 
-      tel: "03-6666-1711", 
-      url: "https://zekkocho-ogibashi.owst.jp/" 
+    {
+      id: 8,
+      name: "ぜっこうちょう 其の八 扇橋店",
+      address: "東京都江東区扇橋２-5-10",
+      tel: "03-6666-1711",
+      url: "https://zekkocho-ogibashi.owst.jp/"
     },
-    { 
-      id: 9, 
-      name: "酒肴鮨 ぜっこうちょう 下谷店", 
-      address: "東京都台東区下谷3-11-9 ライオンズマンション 1F", 
-      tel: "03-6802-3300", 
-      url: "https://zekkochoiriya.owst.jp/" 
+    {
+      id: 9,
+      name: "酒肴鮨 ぜっこうちょう 下谷店",
+      address: "東京都台東区下谷3-11-9 ライオンズマンション 1F",
+      tel: "03-6802-3300",
+      url: "https://zekkochoiriya.owst.jp/"
     },
-    { 
-      id: 10, 
-      name: "沖縄料理ぜっこうちょう 那覇松山店", 
-      address: "沖縄県那覇市松山１-18-13 101号室", 
-      tel: "098-963-9944", 
-      url: "https://zekkocho-nahamatsuyama.owst.jp/" 
+    {
+      id: 10,
+      name: "ぜっこうちょう 蒲田店",
+      address: "東京都大田区西蒲田7丁目44番5号カマタ I・Tビル 地下1階",
+      tel: "03-6424-4818",
+      url: "https://zekkochokamata.owst.jp/"
     },
-    { 
-      id: 11, 
-      name: "和牛焼肉 牛WAKA丸 新橋店", 
-      address: "東京都港区新橋６-10-3 アパホテル新橋御成門 1F", 
-      tel: "03-6809-1429", 
-      url: "https://ushiwakamaru-shinbasi.owst.jp/" 
+    {
+      id: 11,
+      name: "沖縄料理ぜっこうちょう 那覇松山店",
+      address: "沖縄県那覇市松山１-18-13 101号室",
+      tel: "098-963-9944",
+      url: "https://zekkocho-nahamatsuyama.owst.jp/"
     },
-    { 
-      id: 12, 
-      name: "下町もんじゃ・お好み焼き 居酒屋 ぴんぞろ 瑞江店", 
-      address: "東京都江戸川区瑞江2-1-8 アバンドビル2F", 
-      tel: "050-5492-3303", 
-      url: "https://ghga603.gorp.jp/" 
+    {
+      id: 12,
+      name: "和牛焼肉 牛WAKA丸 新橋店",
+      address: "東京都港区新橋６-10-3 アパホテル新橋御成門 1F",
+      tel: "03-6809-1429",
+      url: "https://ushiwakamaru-shinbasi.owst.jp/"
+    },
+    {
+      id: 13,
+      name: "下町もんじゃ・お好み焼き 居酒屋 ぴんぞろ 瑞江店",
+      address: "東京都江戸川区瑞江2-1-8 アバンドビル2F",
+      tel: "050-5492-3303",
+      url: "https://ghga603.gorp.jp/"
     },
   ];
 
@@ -517,10 +524,10 @@ export default function Home() {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 640);
     };
-    
+
     // 初期化時にも実行
     handleResize();
-    
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -536,16 +543,16 @@ export default function Home() {
       {selectedQR && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-30 bg-gray-800" onClick={closeQRPopup}>
           <div className="relative bg-white p-4 rounded-lg shadow-xl" onClick={(e) => e.stopPropagation()}>
-            <button 
+            <button
               className="absolute -top-3 -right-3 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-md text-gray-700 hover:text-gray-900 hover:bg-gray-100"
               onClick={closeQRPopup}
             >
               ✕
             </button>
             <div className="relative w-64 h-64 mx-auto">
-              <Image 
-                src={`/shop${selectedQR}_qr.png`} 
-                alt="QRコード拡大表示" 
+              <Image
+                src={`/shop${selectedQR}_qr.png`}
+                alt="QRコード拡大表示"
                 fill
                 style={{ objectFit: "contain" }}
                 className="p-2"
@@ -556,7 +563,7 @@ export default function Home() {
       )}
 
       {/* ヒーローセクション */}
-      <section 
+      <section
         className="relative min-h-[85vh] flex items-center justify-center yellow-bg overflow-hidden"
         style={{
           backgroundImage: 'url("/back.jpg")',
@@ -570,9 +577,9 @@ export default function Home() {
           <div className="mb-4 inline-block bg-white rounded-full px-10 py-3">
             <h2 className="text-3xl md:text-5xl font-bold text-red-600">美味しいお料理と笑顔のある店へ</h2>
           </div>
-          <h1 className="pop-title mb-4 text-7xl md:text-[10rem] leading-tight">ONE SEAT<br/>ONE LAUGH</h1>
+          <h1 className="pop-title mb-4 text-7xl md:text-[10rem] leading-tight">ONE SEAT<br />ONE LAUGH</h1>
           <p className="text-2xl md:text-4xl mb-8 max-w-6xl mx-auto font-bold">
-            お客様一人ひとりに笑顔をお届けすることが私たちの使命です。<br/>
+            お客様一人ひとりに笑顔をお届けすることが私たちの使命です。<br />
             一席ごとに心を込めたサービスで、かけがえのない時間を提供します。
           </p>
           <Link href="#recruit" className="pop-button inline-block hover:bg-red-700 text-white font-bold py-5 px-16 rounded-full transition-all transform hover:scale-105 text-2xl md:text-3xl">
@@ -596,16 +603,16 @@ export default function Home() {
                 <h3 className="text-3xl font-bold mb-2 text-red-600">企業理念</h3>
                 <p className="text-4xl font-bold mb-4 inline-block border-b-4 border-yellow-400 pb-2 text-black">一席一笑</p>
                 <p className="text-lg mt-4 text-black">
-                  お客様一人ひとりに笑顔をお届けすることが私たちの使命です。<br/>
+                  お客様一人ひとりに笑顔をお届けすることが私たちの使命です。<br />
                   一席ごとに心を込めたサービスで、かけがえのない時間を提供します。
                 </p>
               </div>
-              
+
               <div className="grid md:grid-cols-2 gap-8 mb-8">
                 <div className="bg-yellow-50 p-6 rounded-lg">
                   <h4 className="text-xl font-bold mb-3 text-red-600">地域密着型出店</h4>
                   <p className="text-black">
-                    PINZOROは地域の特性を活かした店舗展開を行っています。<br/>
+                    PINZOROは地域の特性を活かした店舗展開を行っています。<br />
                     地元の食材や文化を取り入れ、その地域ならではの体験を提供することで、
                     お客様との深い絆を築いています。
                   </p>
@@ -614,7 +621,7 @@ export default function Home() {
                   <h4 className="text-xl font-bold mb-3 text-red-600">仕事も行事も楽しめる集団</h4>
                   <p className="text-black">
                     PINZOROでは、仕事だけでなく様々な行事やイベントを通じて、
-                    スタッフ同士の絆を深め、活気ある職場環境を作っています。<br/>
+                    スタッフ同士の絆を深め、活気ある職場環境を作っています。<br />
                     楽しく働くことが、最高のサービスにつながると信じています。
                   </p>
                 </div>
@@ -625,8 +632,8 @@ export default function Home() {
       </section>
 
       {/* BUSINESS */}
-      <section 
-        className="py-20 yellow-bg relative overflow-hidden" 
+      <section
+        className="py-20 yellow-bg relative overflow-hidden"
         id="business"
         style={{
           backgroundImage: 'url("/back.jpg")',
@@ -654,27 +661,27 @@ export default function Home() {
             <div className="relative w-4/5 mx-auto">
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2 relative rounded-lg overflow-hidden" style={{ paddingBottom: '25%' }}>
-                  <Image 
-                    src="/business.png" 
-                    alt="PINZOROビジネス 1" 
+                  <Image
+                    src="/business.png"
+                    alt="PINZOROビジネス 1"
                     fill
                     style={{ objectFit: "contain" }}
                     className="rounded-lg"
                   />
                 </div>
                 <div className="relative rounded-lg overflow-hidden" style={{ paddingBottom: '50%' }}>
-                  <Image 
-                    src="/business2.png" 
-                    alt="PINZOROビジネス 2" 
+                  <Image
+                    src="/business2.png"
+                    alt="PINZOROビジネス 2"
                     fill
                     style={{ objectFit: "contain" }}
                     className="rounded-lg"
                   />
                 </div>
                 <div className="relative rounded-lg overflow-hidden" style={{ paddingBottom: '50%' }}>
-                  <Image 
-                    src="/business3.png" 
-                    alt="PINZOROビジネス 3" 
+                  <Image
+                    src="/business3.png"
+                    alt="PINZOROビジネス 3"
                     fill
                     style={{ objectFit: "contain" }}
                     className="rounded-lg"
@@ -692,14 +699,14 @@ export default function Home() {
       </section>
 
       {/* PINZORO体験セクション */}
-      <section 
-        className="py-20 relative overflow-hidden bg-black" 
+      <section
+        className="py-20 relative overflow-hidden bg-black"
         id="youtube"
       >
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="section-title mb-16 text-white">PINZORO体験</h2>
           <div className="max-w-6xl mx-auto">
-            <div className="rounded-xl overflow-hidden shadow-xl mb-12" style={{ 
+            <div className="rounded-xl overflow-hidden shadow-xl mb-12" style={{
               backgroundImage: 'url("/back.jpg")',
               backgroundSize: '150px',
               backgroundRepeat: 'repeat',
@@ -710,13 +717,13 @@ export default function Home() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-transparent rounded-lg p-4">
                   <div className="p-0 overflow-hidden flex items-center justify-center">
                     <div className="relative w-full mx-auto" style={{ aspectRatio: '16/9', overflow: 'hidden', borderRadius: '0.75rem' }}>
-                      <iframe 
-                        className="absolute top-0 left-0 w-full h-full" 
-                        src="https://www.youtube.com/embed/9AthTj8BWcE?rel=0" 
-                        title="５０円焼きとり絶好鳥　球技大会" 
-                        frameBorder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerPolicy="strict-origin-when-cross-origin" 
+                      <iframe
+                        className="absolute top-0 left-0 w-full h-full"
+                        src="https://www.youtube.com/embed/9AthTj8BWcE?rel=0"
+                        title="５０円焼きとり絶好鳥　球技大会"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerPolicy="strict-origin-when-cross-origin"
                         allowFullScreen
                       ></iframe>
                     </div>
@@ -725,21 +732,21 @@ export default function Home() {
                     <div className="inline-block bg-red-600 text-white px-4 py-1 rounded-full mb-3">動画</div>
                     <h3 className="text-xl font-bold mb-2 text-red-600">球技大会</h3>
                     <p className="text-base mb-2 text-black">
-                      お付き合いのある業者さんと合同でスポーツ大会を開催しました。<br/>バスケットボールやボーリングで決勝まで熱戦を繋り広げました。
+                      お付き合いのある業者さんと合同でスポーツ大会を開催しました。<br />バスケットボールやボーリングで決勝まで熱戦を繋り広げました。
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-transparent rounded-lg p-4">
                   <div className="p-0 overflow-hidden flex items-center justify-center">
                     <div className="relative w-full mx-auto" style={{ aspectRatio: '16/9', overflow: 'hidden', borderRadius: '0.75rem' }}>
-                      <iframe 
-                        className="absolute top-0 left-0 w-full h-full" 
-                        src="https://www.youtube.com/embed/UwAHjCJ-PiI" 
-                        title="50円焼きとり絶好鳥　ミニ四駆大会２０２３in横浜" 
-                        frameBorder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerPolicy="strict-origin-when-cross-origin" 
+                      <iframe
+                        className="absolute top-0 left-0 w-full h-full"
+                        src="https://www.youtube.com/embed/UwAHjCJ-PiI"
+                        title="50円焼きとり絶好鳥　ミニ四駆大会２０２３in横浜"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerPolicy="strict-origin-when-cross-origin"
                         allowFullScreen
                       ></iframe>
                     </div>
@@ -748,21 +755,21 @@ export default function Home() {
                     <div className="inline-block bg-red-600 text-white px-4 py-1 rounded-full mb-3">動画</div>
                     <h3 className="text-xl font-bold mb-2 text-red-600">ミニ四駆大会</h3>
                     <p className="text-base mb-2 text-black">
-                      社内で懐かしのミニ四駆作りを行い、店舗対抗レースを行いました。<br/>マシンの改造やコース設計など、全員が真剣に取り組みました。
+                      社内で懐かしのミニ四駆作りを行い、店舗対抗レースを行いました。<br />マシンの改造やコース設計など、全員が真剣に取り組みました。
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-transparent rounded-lg p-4">
                   <div className="p-0 overflow-hidden flex items-center justify-center">
                     <div className="relative w-full mx-auto" style={{ aspectRatio: '16/9', overflow: 'hidden', borderRadius: '0.75rem' }}>
-                      <iframe 
-                        className="absolute top-0 left-0 w-full h-full" 
-                        src="https://www.youtube.com/embed/zI5qA4RTgLU" 
-                        title="50円焼きとり絶好鳥　釣り大会in沖縄" 
-                        frameBorder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerPolicy="strict-origin-when-cross-origin" 
+                      <iframe
+                        className="absolute top-0 left-0 w-full h-full"
+                        src="https://www.youtube.com/embed/zI5qA4RTgLU"
+                        title="50円焼きとり絶好鳥　釣り大会in沖縄"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerPolicy="strict-origin-when-cross-origin"
                         allowFullScreen
                       ></iframe>
                     </div>
@@ -771,22 +778,22 @@ export default function Home() {
                     <div className="inline-block bg-red-600 text-white px-4 py-1 rounded-full mb-3">動画</div>
                     <h3 className="text-xl font-bold mb-2 text-red-600">社員旅行</h3>
                     <p className="text-base mb-2 text-black">
-                      年一度のお楽しみ社員旅行、今回は沖縄で釣り大会を開催しました。<br/>美しい海と自然の中で、社員同士の絆も深まりました。
+                      年一度のお楽しみ社員旅行、今回は沖縄で釣り大会を開催しました。<br />美しい海と自然の中で、社員同士の絆も深まりました。
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="bg-transparent rounded-lg p-4">
                   <div className="text-center">
                     <p className="text-lg mb-4 text-black font-bold">
-                      PINZOROでは、仕事だけでなく社員同士や他企業との交流も大切にしています。<br/>明るく活気のある職場環境で、チームワークを育みながら日々成長しています。
+                      PINZOROでは、仕事だけでなく社員同士や他企業との交流も大切にしています。<br />明るく活気のある職場環境で、チームワークを育みながら日々成長しています。
                     </p>
                   </div>
                   <div className="text-center">
-                    <Link 
-                      href="https://www.youtube.com/@pinzoro" 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
+                    <Link
+                      href="https://www.youtube.com/@pinzoro"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="pop-button inline-block text-center"
                     >
                       Youtubeチャンネルを見る
@@ -796,50 +803,50 @@ export default function Home() {
               </div>
             </div>
           </div>
-          
-          <div className="mt-16 max-w-6xl mx-auto"><div className="rounded-xl overflow-hidden shadow-xl mb-12" style={{ 
+
+          <div className="mt-16 max-w-6xl mx-auto"><div className="rounded-xl overflow-hidden shadow-xl mb-12" style={{
             backgroundImage: 'url("/back.jpg")',
             backgroundSize: '150px',
             backgroundRepeat: 'repeat',
             backgroundBlendMode: 'soft-light',
             backgroundColor: 'rgba(249, 217, 73, 0.9)'
           }}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-center">
-                <div className="p-8 flex flex-col justify-between order-2 md:order-1" style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                  <div>
-                    <div className="inline-block bg-red-600 text-white px-4 py-1 rounded-full mb-3">環境</div>
-                    <h3 className="text-2xl font-bold mb-4 text-red-600">楽しく働ける環境づくり</h3>
-                    <p className="text-lg mb-4 text-black">
-                      PINZOROでは、仕事だけでなく、スタッフ同士の交流も大切にしています。社員旅行やBBQ、スポーツ大会など、様々なイベントを通じて絆を深めています。
-                    </p>
-                    <p className="text-lg mb-4 text-black">
-                      若いメンバーが多く、活気あふれる職場環境の中で、一人ひとりが自分らしく輝ける場所を提供しています。風通しの良い職場で、アイデアを出し合い、共に成長していくことを大切にしています。
-                    </p>
-                    <p className="text-lg mb-4 text-black font-bold">
-                      私たちと一緒に、お客様に笑顔を届けながら、自分自身も成長していきませんか？
-                    </p>
-                  </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-center">
+              <div className="p-8 flex flex-col justify-between order-2 md:order-1" style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div>
+                  <div className="inline-block bg-red-600 text-white px-4 py-1 rounded-full mb-3">環境</div>
+                  <h3 className="text-2xl font-bold mb-4 text-red-600">楽しく働ける環境づくり</h3>
+                  <p className="text-lg mb-4 text-black">
+                    PINZOROでは、仕事だけでなく、スタッフ同士の交流も大切にしています。社員旅行やBBQ、スポーツ大会など、様々なイベントを通じて絆を深めています。
+                  </p>
+                  <p className="text-lg mb-4 text-black">
+                    若いメンバーが多く、活気あふれる職場環境の中で、一人ひとりが自分らしく輝ける場所を提供しています。風通しの良い職場で、アイデアを出し合い、共に成長していくことを大切にしています。
+                  </p>
+                  <p className="text-lg mb-4 text-black font-bold">
+                    私たちと一緒に、お客様に笑顔を届けながら、自分自身も成長していきませんか？
+                  </p>
                 </div>
-                <div className="relative overflow-hidden order-1 md:order-2 flex items-center justify-center" style={{ paddingTop: '20px', paddingLeft: '15px', paddingRight: '15px' }}>
-                  <FourImageSlideshow />
-                </div>
+              </div>
+              <div className="relative overflow-hidden order-1 md:order-2 flex items-center justify-center" style={{ paddingTop: '20px', paddingLeft: '15px', paddingRight: '15px' }}>
+                <FourImageSlideshow />
               </div>
             </div>
           </div>
-          
+          </div>
+
           <div className="mt-16 max-w-6xl mx-auto">
-          <div className="rounded-xl overflow-hidden shadow-xl mb-12" style={{ 
-            backgroundImage: 'url("/back.jpg")',
-            backgroundSize: '150px',
-            backgroundRepeat: 'repeat',
-            backgroundBlendMode: 'soft-light',
-            backgroundColor: 'rgba(249, 217, 73, 0.9)'
-          }}>
+            <div className="rounded-xl overflow-hidden shadow-xl mb-12" style={{
+              backgroundImage: 'url("/back.jpg")',
+              backgroundSize: '150px',
+              backgroundRepeat: 'repeat',
+              backgroundBlendMode: 'soft-light',
+              backgroundColor: 'rgba(249, 217, 73, 0.9)'
+            }}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-center">
                 <div className="relative overflow-hidden order-1 md:order-1 flex items-center justify-center" style={{ height: '400px', padding: '20px 0' }}>
                   <NineImageSlideshow />
                 </div>
-                
+
                 <div className="p-8 flex flex-col justify-center order-2 md:order-2" style={{ height: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                   <div className="py-6">
                     <div className="inline-block bg-red-600 text-white px-4 py-1 rounded-full mb-3">スタッフ</div>
@@ -859,8 +866,8 @@ export default function Home() {
       </section>
 
       {/* 店舗紹介セクション */}
-      <section 
-        className="py-20 yellow-bg relative overflow-hidden" 
+      <section
+        className="py-20 yellow-bg relative overflow-hidden"
         id="shops"
         style={{
           backgroundImage: 'url("/back.jpg")',
@@ -878,9 +885,9 @@ export default function Home() {
                 <div key={shop.id} className="bg-white rounded-lg overflow-hidden shadow-md transition-transform hover:transform hover:scale-105">
                   <div className="relative pb-[66.67%] bg-gray-200">
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <Image 
-                        src={`/shop${shop.id}.jpg`} 
-                        alt={shop.name} 
+                      <Image
+                        src={`/shop${shop.id}.jpg`}
+                        alt={shop.name}
                         fill
                         style={{ objectFit: "cover" }}
                         className="absolute inset-0"
@@ -895,13 +902,13 @@ export default function Home() {
                         <p className="text-black mb-1">TEL: {shop.tel}</p>
                       </div>
                       <div className="mt-4 md:mt-0 md:ml-4 flex-shrink-0 flex items-center justify-center w-full md:w-auto md:justify-start">
-                        <div 
+                        <div
                           className="relative w-28 h-28 md:w-32 md:h-32 cursor-pointer transition-transform hover:scale-105"
                           onClick={() => setSelectedQR(shop.id)}
                         >
-                          <Image 
-                            src={`/shop${shop.id}_qr.png`} 
-                            alt={`${shop.name}のQRコード`} 
+                          <Image
+                            src={`/shop${shop.id}_qr.png`}
+                            alt={`${shop.name}のQRコード`}
                             fill
                             style={{ objectFit: "contain" }}
                             className="p-1"
@@ -920,7 +927,7 @@ export default function Home() {
               ))}
             </div>
             <div className="flex justify-center mt-8 space-x-4">
-              <button 
+              <button
                 onClick={() => currentPage > 0 && changePage(currentPage - 1)}
                 className={`px-4 py-2 rounded-md ${currentPage === 0 ? 'bg-gray-300 cursor-not-allowed' : 'bg-red-600 text-white hover:bg-red-700'} transition-colors`}
                 disabled={currentPage === 0}
@@ -928,11 +935,11 @@ export default function Home() {
               >
                 <FaChevronLeft />
               </button>
-              
+
               <div className="flex items-center space-x-2">
                 {[...Array(totalPages)].map((_, index) => (
-                  <button 
-                    key={index} 
+                  <button
+                    key={index}
                     onClick={() => changePage(index)}
                     className={`h-8 w-8 rounded-full flex items-center justify-center ${currentPage === index ? 'bg-red-600 text-white' : 'bg-gray-200 text-black hover:bg-gray-300'}`}
                   >
@@ -940,8 +947,8 @@ export default function Home() {
                   </button>
                 ))}
               </div>
-              
-              <button 
+
+              <button
                 onClick={() => currentPage < totalPages - 1 && changePage(currentPage + 1)}
                 className={`px-4 py-2 rounded-md ${currentPage === totalPages - 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-red-600 text-white hover:bg-red-700'} transition-colors`}
                 disabled={currentPage === totalPages - 1}
@@ -964,7 +971,7 @@ export default function Home() {
               <p className="text-lg mb-6 text-center">
                 PINZOROでは、共に成長できる仲間を募集しています。私たちと一緒に新しい価値を創造しましょう。
               </p>
-              
+
               <div className="grid md:grid-cols-3 gap-8 mb-8">
                 <div className="bg-yellow-50 p-6 rounded-lg">
                   <h4 className="text-xl font-bold mb-3 text-red-600">採用したい人材</h4>
@@ -974,14 +981,14 @@ export default function Home() {
                     <li>チームワークを大切にする人材</li>
                   </ul>
                 </div>
-                
+
                 <div className="bg-yellow-50 p-6 rounded-lg">
                   <h4 className="text-xl font-bold mb-3 text-red-600">採用した人材の将来像</h4>
                   <p className="text-black">
                     企業として拡大していく中で、前線で活躍出来る存在になってほしいです。自ら考え、行動し、成長し続ける人を応援します。
                   </p>
                 </div>
-                
+
                 <div className="bg-yellow-50 p-6 rounded-lg">
                   <h4 className="text-xl font-bold mb-3 text-red-600">競合他社と違うところ</h4>
                   <ul className="list-disc pl-5 text-black space-y-2">
@@ -991,7 +998,7 @@ export default function Home() {
                   </ul>
                 </div>
               </div>
-              
+
               <p className="text-center text-lg my-8 text-black font-bold">
                 各店舗へのお問い合わせや応募のご連絡をお待ちしております。
               </p>
@@ -1000,7 +1007,7 @@ export default function Home() {
                   店舗情報を見る
                 </Link>
               </div>
-              
+
               <div className="mt-12 mb-8">
                 <h3 className="text-2xl font-bold mb-6 text-center">経理募集</h3>
                 <div className="bg-yellow-50 p-6 rounded-lg max-w-3xl mx-auto">
@@ -1016,8 +1023,8 @@ export default function Home() {
                     <div>
                       <h4 className="text-xl font-bold mb-3 text-red-600">勤務地</h4>
                       <p className="text-black mb-2">
-                        〒130-0022<br/>
-                        東京都墨田区江東橋2-8-1<br/>
+                        〒130-0022<br />
+                        東京都墨田区江東橋2-8-1<br />
                         ワコーレ錦糸町マンション1F E室
                       </p>
                       <p className="text-sm text-gray-600 mt-2">※店舗ではなく事務所での勤務となります</p>
@@ -1025,7 +1032,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              
+
               <p className="text-center text-lg mb-6 text-black font-bold">
                 事務所へのお問い合わせや応募のご連絡もお待ちしております。
               </p>
@@ -1035,8 +1042,8 @@ export default function Home() {
       </section>
 
       {/* SPONSOR */}
-      <section 
-        className="py-20 relative overflow-hidden" 
+      <section
+        className="py-20 relative overflow-hidden"
         id="sponsor"
         style={{
           backgroundImage: 'url("/back.jpg")',
@@ -1050,16 +1057,16 @@ export default function Home() {
           <h2 className="section-title mb-16">SPONSOR</h2>
           <div className="max-w-5xl mx-auto">
             <p className="text-center text-lg mb-12 text-black font-bold">
-              PINZOROは以下の企業様を支援しております。<br/>
+              PINZOROは以下の企業様を支援しております。<br />
               共に成長し、価値を創造してまいります。
             </p>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
               <div className="bg-transparent p-4 md:p-6 rounded-lg">
                 <div className="relative w-2/3 md:w-full mx-auto" style={{ paddingBottom: '45%' }}>
-                  <Image 
-                    src="/sponsor1.png" 
-                    alt="スポンサー企業 1" 
+                  <Image
+                    src="/sponsor1.png"
+                    alt="スポンサー企業 1"
                     fill
                     style={{ objectFit: "contain" }}
                     className="rounded-lg"
@@ -1067,12 +1074,12 @@ export default function Home() {
                 </div>
 
               </div>
-              
+
               <div className="bg-transparent p-4 md:p-6 rounded-lg">
                 <div className="relative w-2/3 md:w-full mx-auto" style={{ paddingBottom: '45%' }}>
-                  <Image 
-                    src="/sponsor2.png" 
-                    alt="スポンサー企業 2" 
+                  <Image
+                    src="/sponsor2.png"
+                    alt="スポンサー企業 2"
                     fill
                     style={{ objectFit: "contain" }}
                     className="rounded-lg"
@@ -1081,7 +1088,7 @@ export default function Home() {
 
               </div>
             </div>
-            
+
 
           </div>
         </div>
